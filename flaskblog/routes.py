@@ -8,7 +8,7 @@ posts = [
     {
         'author': 'Manuel Lopez',
         'title': 'Cafe Americano',
-        'content': '$500',
+        'content': '$200',
         'date_posted': 'September 20,2019'
     },
     {
