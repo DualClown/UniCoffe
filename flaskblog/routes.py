@@ -6,7 +6,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 posts = [
     {
-        'author': 'Manuel Lopez',
+        'author': 'Manuel Alejandro',
         'title': 'Cafe Europeo',
         'content': '$200',
         'date_posted': 'September 20,2019'
