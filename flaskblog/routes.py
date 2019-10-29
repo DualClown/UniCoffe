@@ -30,8 +30,8 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-# arreglar en el layout y este es un nuevo boton
-@app.route("/hola")
+# arreglar en el layout y este es un nuevo boton arreglar para meter el saldo
+@app.route("/hola", methods=['GET', 'POST'])
 def hola():
     return render_template('hola.html', title='Hola')
 
@@ -44,8 +44,9 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
+        saldo = 500
         user = User(username=form.username.data,
-                    email=form.email.data, password=hashed_password)
+                    email=form.email.data, password=hashed_password, saldo=saldo)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -78,5 +79,6 @@ def logout():
 @app.route("/account")
 @login_required
 def account():
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = url_for(
+        'static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Acount', image_file=image_file)
