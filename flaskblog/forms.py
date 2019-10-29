@@ -14,8 +14,7 @@ class RegistrationForm(FlaskForm):
                                      validators=[DataRequired(),
                                                  EqualTo('password')])
     submit = SubmitField('Sign Up')
-    # TODO AQUI HOJO
-    saldo = IntegerField('Saldo', validators=[DataRequired()])
+
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()

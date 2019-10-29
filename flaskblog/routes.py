@@ -31,7 +31,7 @@ def about():
     return render_template('about.html', title='About')
 
 # arreglar en el layout y este es un nuevo boton arreglar para meter el saldo
-@app.route("/hola", methods=['GET', 'POST'])
+@app.route("/hola")
 def hola():
     return render_template('hola.html', title='Hola')
 
