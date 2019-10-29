@@ -16,6 +16,12 @@ posts = [
         'title': 'Cafe Colombiano',
         'content': '$1.000',
         'date_posted': 'September 20,2019'
+    },
+    {
+        'author': 'Sebastian Rengifo',
+        'title': 'Gaseosa',
+        'content': '$2.000',
+        'date_posted': 'September 20,2019'
     }
 ]
 
@@ -30,10 +36,15 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-# arreglar en el layout y este es un nuevo boton arreglar para meter el saldo
+# arreglar en el layout y este es un nuevo boton arreglar para meter el balance
 @app.route("/admin")
+@login_required
 def admin():
-    return render_template('admin.html', title='Admin')
+    if current_user.username == "manuel":
+        return render_template('admin.html', title='Admin')
+    else:
+        flash('You are not admin!', 'danger')
+        return redirect(url_for('login'))
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -44,9 +55,9 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(
             form.password.data).decode('utf-8')
-        saldo = 500
+        balance = 500
         user = User(username=form.username.data,
-                    email=form.email.data, password=hashed_password, saldo=saldo)
+                    email=form.email.data, password=hashed_password, balance=balance)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -76,10 +87,19 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('your account has been updated!', 'succes')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data == current_user.username
+        form.email.data == current_user.email
     image_file = url_for(
         'static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Acount',

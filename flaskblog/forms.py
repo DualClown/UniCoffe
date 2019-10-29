@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, length, email, EqualTo, ValidationError
 from flaskblog.models import User
 from flask_login import current_user
@@ -53,3 +53,8 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError(
                     'That email is taken please choose a different one.')
+
+
+class UpdateBalanceForm(FlaskForm):
+    balance = IntegerField('Balance', validators=[DataRequired()])
+    submit = SubmitField('Update Balance')

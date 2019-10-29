@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<legend class="border-bottom mb-4">Cuentas Registradas</legend>
-<div class="content-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 border border-primary">{{current_user.username}}</div>
-      <div class="col-4 text-success border border-secondary">{{current_user.saldo}}</div>
-    </div>
+<legend class="border-bottom mb-4 text-warning">Cuentas Registradas</legend>
+<div class="container">
+  <div class="row">
+    <div class="col-8 border border-primary">{{current_user.username}}</div>
+    <div class="col-4 text-success border border-secondary">{{current_user.balance}}</div>
   </div>
 </div>
 {% endblock content %}
