@@ -1,10 +1,51 @@
 {% extends "layout.html" %}
 {% block content %}
-<legend class="border-bottom mb-4 text-warning">Cuentas Registradas</legend>
+<div class="content-section">
+<legend class="border-bottom mb-4">Registered Accounts</legend>
 <div class="container">
+  {% for usuario in usuarios %}
   <div class="row">
-    <div class="col-8 border border-primary">{{current_user.username}}</div>
-    <div class="col-4 text-success border border-secondary">{{current_user.balance}}</div>
+    <div class="col-8 border border-primary">{{ usuario.username }}</div>
+    <div class="col-4 text-success border border-secondary">${{ usuario.balance }}</div>
   </div>
+  {% endfor %}
+  </div>
+</div>
+<div class="content-section">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Update Balance</legend>
+      <div class="form-froup">
+        {{ form.username.label(class="form-control-label") }}
+        {% if form.username.errors %}
+        {{ form.username(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.username.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.username(class="form-control form-control-lg") }}
+        {% endif%}
+      </div>
+      <div class="form-froup">
+        {{ form.balance.label(class="form-control-label") }}
+        {% if form.balance.errors %}
+        {{ form.balance(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.balance.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% else %}
+        {{ form.balance(class="form-control form-control-lg") }}
+        {% endif%}
+      </div>
+    </fieldset>
+    <div class="form-froup">
+      {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+  </form>
 </div>
 {% endblock content %}
