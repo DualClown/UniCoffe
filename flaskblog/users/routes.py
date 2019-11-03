@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskblog import db, bcrypt
 from flaskblog.models import User, Post
@@ -12,7 +12,9 @@ users = Blueprint('users', __name__)
 @users.route("/admin", methods=['GET', 'POST'])
 @login_required
 def admin():
-    if current_user.username == "Admin":
+    if current_user.username != "Admin":
+        abort(403)
+    else:
         usuarios = User.query.all()
         form = UpdateBalanceForm()
         if form.validate_on_submit():
@@ -21,9 +23,6 @@ def admin():
             db.session.commit()
             return redirect(url_for('users.admin'))
         return render_template('admin.html', title='Admin', usuarios=usuarios, form=form)
-    else:
-        flash('You are not admin!', 'danger')
-        return redirect(url_for('main.home'))
 
 
 @users.route("/register", methods=['GET', 'POST'])
@@ -126,5 +125,5 @@ def reset_token(token):
         user.password = hashed_password
         db.session.commit()
         flash('Your password has been updated! You are now able to log in', 'success')
-        return redirect(url_for('main.login'))
+        return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
