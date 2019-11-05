@@ -25,6 +25,18 @@ def admin():
         return render_template('admin.html', title='Admin', usuarios=usuarios, form=form)
 
 
+@users.route("/admin/<int:user_id>/delete", methods=['GET', 'POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if current_user.username != "Admin":
+        abort(403)
+    db.session.delete(user)
+    db.session.commit()
+    flash('The user has been deleted!', 'success')
+    return redirect(url_for('users.admin'))
+
+
 @users.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:

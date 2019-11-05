@@ -7,6 +7,7 @@
         <tr>
           <th scope="col">Username</th>
           <th scope="col">Balance</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,13 @@
           <tr>
             <td>{{ usuario.username }}</td>
             <td>{{ "{:,}".format(usuario.balance) }}</td>
+            {% if usuario.username != "Admin" %}
+              <td>
+                <a class="btn btn-danger btn-sm m-1" href="{{ url_for('users.delete_user', user_id=usuario.id) }}">Delete</a>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>
