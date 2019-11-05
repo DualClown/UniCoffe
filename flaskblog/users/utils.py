@@ -6,7 +6,7 @@ from flaskblog import mail
 
 
 def save_picture(form_picture):
-    random_hex = str(os.urandom(8))
+    random_hex = str(os.urandom(3))
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(
@@ -15,6 +15,7 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
+
     return picture_fn
 
 
