@@ -5,6 +5,7 @@ from flaskblog.models import User, Post, Orders
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm, UpdateBalanceForm)
 from flaskblog.users.utils import save_picture, send_reset_email
+import time
 
 users = Blueprint('users', __name__)
 
@@ -141,7 +142,7 @@ def reset_token(token):
     return render_template('reset_token.html', title='Reset Password', form=form)
 
 
-@users.route("/order_coffe")
+@users.route("/order_coffe", methods=['GET', 'POST'])
 @login_required
 def order_coffe():
     new_balance = current_user.balance
@@ -154,6 +155,6 @@ def order_coffe():
         current_user.balance = new_balance
         db.session.add(order)
         db.session.commit()
+        order_number = order.id
         flash("Thank you for your purchase your coffe is on the way.", 'success')
-        return redirect(url_for('main.home'))
-    return render_template('order_coffe.html')
+        return render_template('order_coffe.html', order_number=order_number)
