@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from flaskblog import db, bcrypt
-from flaskblog.models import User, Post
+from flaskblog.models import User, Post, Orders
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm, UpdateBalanceForm)
 from flaskblog.users.utils import save_picture, send_reset_email
@@ -19,7 +19,7 @@ def admin():
         form = UpdateBalanceForm()
         if form.validate_on_submit():
             user = User.query.filter_by(username=form.username.data).first()
-            user.balance = form.balance.data
+            user.balance += form.balance.data
             db.session.commit()
             return redirect(url_for('users.admin'))
         return render_template('admin.html', title='Admin', usuarios=usuarios, form=form)
@@ -139,3 +139,21 @@ def reset_token(token):
         flash('Your password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@users.route("/order_coffe")
+@login_required
+def order_coffe():
+    new_balance = current_user.balance
+    new_balance -= 500
+    if new_balance < 0:
+        flash("You don't have enough money please recharge your acoount.", 'danger')
+        return redirect(url_for('main.home'))
+    else:
+        order = Orders(client=current_user.username)
+        current_user.balance = new_balance
+        db.session.add(order)
+        db.session.commit()
+        flash("Thank you for your purchase your coffe is on the way.", 'success')
+        return redirect(url_for('main.home'))
+    return render_template('order_coffe.html')
