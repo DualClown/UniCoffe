@@ -51,7 +51,7 @@ class Post(db.Model):
 
 class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    client = db.Column(db.String(20), unique=True, nullable=False)
+    client = db.Column(db.String(20), nullable=False)
 
     def __repr__(self):
         return "Orders('{}', '{}')".format(self.id, self.client)
