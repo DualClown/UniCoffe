@@ -3,6 +3,12 @@ from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from flaskblog import mail
+# import RPi.GPIO as GPIO
+import time
+# import serial
+
+
+# arduino = serial.Serial('/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0', 9600)
 
 
 def save_picture(form_picture):
@@ -30,3 +36,23 @@ If you did not make this request then simply ignore this email and no changes wi
 '''.format(url_for('users.reset_token', token=token, _external=True))
 
     mail.send(msg)
+
+
+# def serve_coffe():
+#     GPIO.setmode(GPIO.BCM)
+#     GPIO.setup(5, GPIO.OUT)
+#     GPIO.setup(6, GPIO.OUT)
+#     GPIO.setup(13, GPIO.OUT)
+#     GPIO.setup(19, GPIO.OUT)
+#     time.sleep(2)
+#     arduino.write('0'.encode())
+#     time.sleep(5)
+#     GPIO.output(5, GPIO.HIGH)
+#     GPIO.output(6, GPIO.HIGH)
+#     GPIO.output(13, GPIO.HIGH)
+#     GPIO.output(19, GPIO.HIGH)
+#     time.sleep(3.7)
+#     GPIO.output(5, GPIO.LOW)
+#     GPIO.output(6, GPIO.LOW)
+#     GPIO.output(13, GPIO.LOW)
+#     GPIO.output(19, GPIO.LOW)

@@ -5,7 +5,7 @@ from flaskblog.models import User, Post, Orders
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm, UpdateBalanceForm)
 from flaskblog.users.utils import save_picture, send_reset_email
-import time
+# serve_coffe
 
 users = Blueprint('users', __name__)
 
@@ -155,6 +155,6 @@ def order_coffe():
         current_user.balance = new_balance
         db.session.add(order)
         db.session.commit()
-        order_number = order.id
         flash("Thank you for your purchase your coffe is on the way.", 'success')
-        return render_template('order_coffe.html', order_number=order_number)
+        # serve_coffe()
+        return render_template('order_coffe.html')
