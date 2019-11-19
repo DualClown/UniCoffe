@@ -8,7 +8,7 @@ import time
 import serial
 
 
-arduino = serial.Serial('/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0', 9600)
+# arduino = serial.Serial('/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0', 9600)
 
 
 def save_picture(form_picture):
@@ -45,7 +45,7 @@ def serve_coffe():
     GPIO.setup(13, GPIO.OUT)
     GPIO.setup(19, GPIO.OUT)
     time.sleep(2)
-    arduino.write('0'.encode())
+    # arduino.write('0'.encode())
     time.sleep(5)
     GPIO.output(5, GPIO.HIGH)
     GPIO.output(6, GPIO.HIGH)
