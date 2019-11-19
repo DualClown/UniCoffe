@@ -39,20 +39,22 @@ If you did not make this request then simply ignore this email and no changes wi
 
 
 def serve_coffe():
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(5, GPIO.OUT)
     GPIO.setup(6, GPIO.OUT)
     GPIO.setup(13, GPIO.OUT)
     GPIO.setup(19, GPIO.OUT)
-    time.sleep(2)
+    time.sleep(2)  # TIEMPO DE ESPERA DEL SERIAL
     # arduino.write('0'.encode())
-    time.sleep(5)
+    # time.sleep(2) # TIEMPO DE ESPERA PARA EL SERIAL
+    GPIO.output(19, GPIO.HIGH)  # PRENDE CALENTADOR
     GPIO.output(5, GPIO.HIGH)
     GPIO.output(6, GPIO.HIGH)
-    GPIO.output(13, GPIO.HIGH)
-    GPIO.output(19, GPIO.HIGH)
-    time.sleep(3.7)
+    time.sleep(3)
+    GPIO.output(13, GPIO.HIGH)  # PRENDE BOMBA
     GPIO.output(5, GPIO.LOW)
     GPIO.output(6, GPIO.LOW)
-    GPIO.output(13, GPIO.LOW)
-    GPIO.output(19, GPIO.LOW)
+    GPIO.output(19, GPIO.LOW)  # APAPA CALENTADOR
+    time.sleep(3.7)
+    GPIO.output(13, GPIO.LOW)  # APAGA BOMBA
