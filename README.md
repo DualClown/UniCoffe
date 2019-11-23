@@ -40,3 +40,8 @@ To star running the program you need to make some changes to the code
 -   [ ] When working on the raspberry directly you can uncomment the imports and the serve_coffe() and pay attention to the pins used for the control of the heater and the pump.
 -   [ ] You need to fill your email and password in the flaskblog/config.py file
 -   [ ] There is already an Admin user created, email is admin@gmail.com and password is admin. You can change this anytime you want.
+
+## Running the app
+The only thing you need to do now is to run this command:
+   
+    python3 run.py
