@@ -3,12 +3,12 @@ from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
 from flaskblog import mail
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
-import serial
+# import serial
 
 
-arduino = serial.Serial('/dev/ttyUSB0', 9600)
+# arduino = serial.Serial('/dev/ttyUSB0', 9600)
 
 
 def save_picture(form_picture):
@@ -38,23 +38,23 @@ If you did not make this request then simply ignore this email and no changes wi
     mail.send(msg)
 
 
-def serve_coffe():
-    GPIO.setwarnings(False)
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(5, GPIO.OUT)
-    GPIO.setup(6, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
-    GPIO.setup(19, GPIO.OUT)
-    time.sleep(7)  # TIEMPO DE ESPERA DEL SERIAL
-    arduino.write('0'.encode())
-    time.sleep(2)  # TIEMPO DE ESPERA PARA EL SERIAL
-    GPIO.output(19, GPIO.HIGH)  # PRENDE CALENTADOR
-    GPIO.output(5, GPIO.HIGH)
-    GPIO.output(6, GPIO.HIGH)
+def serve_coffee():
+    # GPIO.setwarnings(False)
+    # GPIO.setmode(GPIO.BCM)
+    # GPIO.setup(5, GPIO.OUT) # LED1
+    # GPIO.setup(6, GPIO.OUT) # LED2
+    # GPIO.setup(13, GPIO.OUT)
+    # GPIO.setup(19, GPIO.OUT)
+    # time.sleep(7)  # WAIT TIME FOT THE SERIAL MESSAGE DELAY
+    # arduino.write('0'.encode()) # STAR THE SERVO RUTINE
+    # time.sleep(2)  # WAIT TIME FOT THE SERIAL MESSAGE DELAY
+    # GPIO.output(19, GPIO.HIGH)  # HEATER ON
+    # GPIO.output(5, GPIO.HIGH)
+    # GPIO.output(6, GPIO.HIGH)
     time.sleep(10)
-    GPIO.output(13, GPIO.HIGH)  # PRENDE BOMBA
-    GPIO.output(5, GPIO.LOW)
-    GPIO.output(6, GPIO.LOW)
-    GPIO.output(19, GPIO.LOW)  # APAPA CALENTADOR
-    time.sleep(3.7)
-    GPIO.output(13, GPIO.LOW)  # APAGA BOMBA
+    # GPIO.output(13, GPIO.HIGH)  # PUMP ON
+    # GPIO.output(5, GPIO.LOW)
+    # GPIO.output(6, GPIO.LOW)
+    # GPIO.output(19, GPIO.LOW)  # HEATER OFF
+    # time.sleep(3.7)
+    # GPIO.output(13, GPIO.LOW)  # PUMP OFF

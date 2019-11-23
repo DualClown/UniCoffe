@@ -4,7 +4,7 @@ from flaskblog import db, bcrypt
 from flaskblog.models import User, Post, Orders
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm, UpdateBalanceForm)
-from flaskblog.users.utils import save_picture, send_reset_email, serve_coffe
+from flaskblog.users.utils import save_picture, send_reset_email, serve_coffee
 
 users = Blueprint('users', __name__)
 
@@ -155,5 +155,5 @@ def order_coffe():
         db.session.add(order)
         db.session.commit()
         flash("Thank you for your purchase your coffe is on the way.", 'success')
-        serve_coffe()
+        serve_coffee()
         return render_template('order_coffe.html')

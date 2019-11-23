@@ -28,13 +28,15 @@ This command will install all the dependencies you need for this project.
 
 ## Building
 
-\-[]()
+![Build](Build.jpeg) This are the connection you need to make to build the coffee machine.
 
 ## Programming
 
 To star running the program you need to make some changes to the code
 
-- [ ] First make sure to change the name of the port you are using for the Arduino in the /flaskblog/users/utils.py
-- [ ]
-- [ ]
-- [ ]
+-   [ ] Program the Arduino Nano with the [Servo](Servo.ino) file.
+-   [ ] In run.py you need to change the value of the host variable to your IP.
+-   [ ] Make sure to change the name of the port you are using for the Arduino in the /flaskblog/users/utils.py
+-   [ ] When working on the raspberry directly you can uncomment the imports and the serve_coffe() and pay attention to the pins used for the control of the heater and the pump.
+-   [ ] You need to fill your email and password in the flaskblog/config.py file
+-   [ ] There is already an Admin user created, email is admin@gmail.com and password is admin. You can change this anytime you want.
