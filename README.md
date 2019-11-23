@@ -34,7 +34,7 @@ This command will install all the dependencies you need for this project.
 
 To star running the program you need to make some changes to the code
 
-- [ ] 
+- [ ] First make sure to change the name of the port you are using for the Arduino in the /flaskblog/users/utils.py
 - [ ]
 - [ ]
 - [ ]
